@@ -8,6 +8,11 @@ define(['N/file', 'N/search', 'N/record', 'N/runtime', 'N/log'], function (file,
     // Configuration / Script Parameter defaults
     const CONFIG = {
         FILE_ID_PARAM: 'custscript_sample_loader_order_file_id', // Direct File ID parameter
+
+        PENDING_FOLDER_ID: 2488938,
+        PROCESSED_FOLDER_ID: 2488939,
+        ERROR_FOLDER_ID: 2488940,
+      
         CUSTOMER_ID: 972653,                                 // Hardcoded Customer ID
         LOCATION_ID: 32,                                     // Hardcoded Location ID (CA2)
         MG_SOURCE_SYSTEM_ID: 2,                               // custentity_ft_sourcesystem value ID for MG
@@ -16,6 +21,55 @@ define(['N/file', 'N/search', 'N/record', 'N/runtime', 'N/log'], function (file,
         CUST_REF_QUALIFIER_PO: 2                              // custrecord_ft_cr_qualifier internal id for "PO Number"
     };
 
+
+  function getFilesFromFolder(folderId) {
+    const out = [];
+
+    try {
+        const fileSearch = search.create({
+            type: 'file',
+            filters: [['folder', 'anyof', String(folderId)]],
+            columns: ['name', 'internalid']
+        });
+
+        fileSearch.run().each(function (res) {
+            out.push({
+                id: res.id,
+                name: res.getValue({ name: 'name' })
+            });
+            return true;
+        });
+
+    } catch (e) {
+        log.error('Error searching folder files', {
+            folderId: folderId,
+            error: e
+        });
+    }
+
+    return out;
+}
+
+function moveFile(fileId, folderId) {
+    try {
+        const f = file.load({ id: fileId });
+
+        f.folder = folderId;
+        f.save();
+
+        log.audit(
+            'File Moved',
+            `File ${fileId} moved to folder ${folderId}`
+        );
+
+    } catch (e) {
+        log.error('Error moving file', {
+            fileId: fileId,
+            folderId: folderId,
+            error: e
+        });
+    }
+}
     // Helper: Parse CSV Line handling quotes and commas
     function parseCsvLine(line) {
         const out = [];
@@ -1001,28 +1055,71 @@ define(['N/file', 'N/search', 'N/record', 'N/runtime', 'N/log'], function (file,
     /**
     * Retrieves the file ID directly from script parameter
     */
-    function getInputData() {
-        try {
-            const script = runtime.getCurrentScript();
-            const fileId = script.getParameter({ name: CONFIG.FILE_ID_PARAM });
+    // function getInputData() {
+    //     try {
+    //         const script = runtime.getCurrentScript();
+    //         const fileId = script.getParameter({ name: CONFIG.FILE_ID_PARAM });
 
-            if (!fileId) {
-                log.error('Missing Parameter', `Script parameter ${CONFIG.FILE_ID_PARAM} is not configured.`);
-                return [];
+    //         if (!fileId) {
+    //             log.error('Missing Parameter', `Script parameter ${CONFIG.FILE_ID_PARAM} is not configured.`);
+    //             return [];
+    //         }
+
+    //         log.audit('getInputData', `Processing single file ID: ${fileId}`);
+
+    //         return [{
+    //             id: fileId,
+    //             name: 'Direct_File_Import_' + fileId + '.csv'
+    //         }];
+    //     } catch (e) {
+    //         log.error('Error in getInputData', e.message || e.toString());
+    //         return [];
+    //     }
+    // }
+function getInputData() {
+    try {
+        const script = runtime.getCurrentScript();
+
+        const paramFileId = script.getParameter({
+            name: CONFIG.FILE_ID_PARAM
+        });
+
+        // Get all files from Pending folder
+        const files = getFilesFromFolder(
+            CONFIG.PENDING_FOLDER_ID
+        );
+
+        // Also process parameter file if provided
+        if (paramFileId) {
+
+            const already = files.some(function (f) {
+                return String(f.id) === String(paramFileId);
+            });
+
+            if (!already) {
+                files.push({
+                    id: paramFileId,
+                    name: 'Param_File_' + paramFileId + '.csv'
+                });
             }
-
-            log.audit('getInputData', `Processing single file ID: ${fileId}`);
-
-            return [{
-                id: fileId,
-                name: 'Direct_File_Import_' + fileId + '.csv'
-            }];
-        } catch (e) {
-            log.error('Error in getInputData', e.message || e.toString());
-            return [];
         }
-    }
 
+        log.audit(
+            'getInputData',
+            `Files to process: ${files.length}`
+        );
+
+        return files;
+
+    } catch (e) {
+        log.error(
+            'Error in getInputData',
+            e.message || e.toString()
+        );
+
+        return [];
+    }
+}
     /**
     * Map stage: Loads each file, parses rows, and writes grouped by SID
     */
@@ -1100,8 +1197,22 @@ define(['N/file', 'N/search', 'N/record', 'N/runtime', 'N/log'], function (file,
 
             log.audit('File processing complete', `Processed ${lineIndex} lines in ${fileName}. Emitted ${emittedCount} rows.`);
 
+
+          // SUCCESS
+          moveFile(
+          fileId,
+          CONFIG.PROCESSED_FOLDER_ID
+          );
+          
         } catch (e) {
             log.error(`Error in map stage for file ID ${fileId}`, e.message || e.toString());
+
+    // ERROR
+    if (fileId) {
+        moveFile(
+            fileId,
+            CONFIG.ERROR_FOLDER_ID
+        );        
         }
     }
 
