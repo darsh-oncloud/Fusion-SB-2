@@ -748,6 +748,26 @@ define(['N/file', 'N/search', 'N/record', 'N/runtime', 'N/log'], function (file,
 
         // Set main body fields
         soRec.setValue({ fieldId: 'entity', value: entityId });
+
+try {
+    const customerFields = search.lookupFields({
+        type: search.Type.CUSTOMER,
+        id: entityId,
+        columns: ['custentity_ft_topparent']
+    });
+
+    const topParent = customerFields.custentity_ft_topparent;
+
+    if (topParent && topParent.length) {
+        soRec.setValue({
+            fieldId: 'custbody_ft_topparent',
+            value: topParent[0].value
+        });
+    }
+} catch (e) {
+    log.error('Error Setting FT Top Parent', e);
+}
+      
         soRec.setValue({ fieldId: 'location', value: orderLocationId });
         soRec.setValue({ fieldId: 'externalid', value: plan.externalId });
         soRec.setValue({ fieldId: 'custbody_po_number_vb', value: poNumbers.join(', ') });
