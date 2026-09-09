@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MercuryGate>
+	<Header SynapseFlag="false" MercuryGateFlag="false">
+		<SenderID>620ALLTRIUMPHPH</SenderID>
+		<ReceiverID>FUST</ReceiverID>
+		<DocTypeID>850</DocTypeID>
+		<ISACntNumber>4569085451</ISACntNumber>
+		<STCntNumber>SO934701</STCntNumber>
+		<OrderNumber>4569085451</OrderNumber>
+	</Header>
+	<Load type="Regular" action="UpdateOrAdd">
+		<Facility>IL2</Facility>
+		<Enterprise name="SMARTMOUTH"/>
+		<ReferenceNumbers>
+			<ReferenceNumber type="SOID" isPrimary="true">4569085451</ReferenceNumber>
+			<ReferenceNumber type="PO Number" isPrimary="false">4569085451</ReferenceNumber>
+			<ReferenceNumber type="Depositor Order Number" isPrimary="false">SO934701</ReferenceNumber>
+			<ReferenceNumber type="Customer Reference Number" isPrimary="false">SO934701</ReferenceNumber>
+			<ReferenceNumber type="Bill of Lading Number" isPrimary="false">SO934701</ReferenceNumber>
+			<ReferenceNumber type="EXTRA" isPrimary="false">receiverID+620ALLTRIUMPHPH;BillTo+N1*BT*Walgreens Co~N3*P.O BOX 4025~N4*DANVILLE*IL*61834*USA~</ReferenceNumber>
+			<ReferenceNumber type="Consignee Alias" isPrimary="false">WALGREENS</ReferenceNumber>
+			<ReferenceNumber type="EDI SCAC" isPrimary="false">GLBL</ReferenceNumber>
+		</ReferenceNumbers>
+		<Payment>
+			<Method>Prepaid</Method>
+			<BillTo>
+				<Address>
+					<LocationCode>37024L</LocationCode>
+				</Address>
+			</BillTo>
+		</Payment>
+		<Plan>
+			<Events>
+				<Event type="pickup" sequenceNum="1">
+					<Dates>
+						<Date type="earliest">2026-08-26T06:00:00</Date>
+						<Date type="latest">2026-08-26T17:00:00</Date>
+					</Dates>
+					<Address isResidential="false">
+						<LocationCode>IL2</LocationCode>
+					</Address>
+				</Event>
+				<Event type="drop" sequenceNum="2">
+					<Dates>
+						<Date type="earliest">2026-09-02T06:00:00</Date>
+						<Date type="latest">2026-09-02T17:00:00</Date>
+					</Dates>
+					<Address type="CN" isResidential="false">
+						<LocationCode>ZD11</LocationCode>
+						<LocationCodeQualifier>92</LocationCodeQualifier>
+						<Name>MOUNT VERNON IL - DC</Name>
+						<AddrLine1>Lake Ter Ne, 5100</AddrLine1>
+						<City>Mount Vernon</City>
+						<StateProvince>IL</StateProvince>
+						<PostalCode>62864</PostalCode>
+						<CountryCode>USA</CountryCode>
+					</Address>
+				</Event>
+			</Events>
+		</Plan>
+		<Shipments>
+			<Shipment type="Regular" action="UpdateOrAdd">
+				<Status>Pending</Status>
+				<Enterprise name="SMARTMOUTH"/>
+				<ReferenceNumbers>
+					<ReferenceNumber type="SID" isPrimary="true">4569085451</ReferenceNumber>
+					<ReferenceNumber type="PO Number" isPrimary="false">4569085451</ReferenceNumber>
+					<ReferenceNumber type="Depositor Order Number" isPrimary="false">SO934701</ReferenceNumber>
+					<ReferenceNumber type="Customer Reference Number" isPrimary="false">SO934701</ReferenceNumber>
+					<ReferenceNumber type="Bill of Lading Number" isPrimary="false">SO934701</ReferenceNumber>
+					<ReferenceNumber type="Consignee Alias" isPrimary="false">WALGREENS</ReferenceNumber>
+					<ReferenceNumber type="EDI SCAC" isPrimary="false"/>
+				</ReferenceNumbers>
+				<Comments>
+					<Comment type="WHI">MOUNT VERNON IL - DC 4569085451 Mount Vernon IL</Comment>
+					<Comment type="WHI">PRINT PACK LIST DO NOT RETRIEVE</Comment>
+					<Comment type="WHI">Pallet Labels</Comment>
+				</Comments>
+				<Dimensions>
+					<Dimension type="RatingCount">1</Dimension>
+				</Dimensions>
+				<Dates>
+					<Date type="Requested Ship Date">2026-08-30T09:31:20.337-04:00</Date>
+					<Pickup>
+						<Date type="earliest">2026-08-26T06:00:00</Date>
+						<Date type="latest">2026-08-26T17:00:00</Date>
+					</Pickup>
+					<Drop>
+						<Date type="earliest">2026-09-02T06:00:00</Date>
+						<Date type="latest">2026-09-02T17:00:00</Date>
+					</Drop>
+				</Dates>
+				<Shipper>
+					<Address>
+						<LocationCode>ROME</LocationCode>
+					</Address>
+				</Shipper>
+				<Consignee>
+					<Address type="ST" isResidential="false">
+						<LocationCode>NATIONAL CONSOLIDATION SERVICE</LocationCode>
+						<LocationCodeQualifier>92</LocationCodeQualifier>
+						<Name>MOUNT VERNON IL - DC</Name>
+						<CodeName>WALGREENS</CodeName>
+						<AddrLine1>Lake Ter Ne, 5100</AddrLine1>
+						<City>Mount Vernon</City>
+						<StateProvince>IL</StateProvince>
+						<PostalCode>62864</PostalCode>
+						<CountryCode>USA</CountryCode>
+					</Address>
+				</Consignee>
+				<ItemGroups>
+					<ItemGroup id="SM.OR480.18" GTIN="00697366000623" isShipUnit="false" isHandlingUnit="false" sequence="1">
+						<ReferenceNumbers>
+							<ReferenceNumber type="IN" isPrimary="false">494207</ReferenceNumber>
+							<ReferenceNumber type="VN" isPrimary="false">SM.OR480.18</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">494207</ReferenceNumber>
+							<ReferenceNumber type="Pack" isPrimary="false">18</ReferenceNumber>
+							<ReferenceNumber type="MG" isPrimary="false">1935</ReferenceNumber>
+							<ReferenceNumber type="LT" isPrimary="false">O11042726</ReferenceNumber>
+							<ReferenceNumber type="GTIN" isPrimary="false">00697366000623</ReferenceNumber>
+							<ReferenceNumber type="UOM" isPrimary="false">CA</ReferenceNumber>
+							<ReferenceNumber type="QT" isPrimary="false">5.0</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">SM.OR480.18</ReferenceNumber>
+							<ReferenceNumber type="Inner Pack" isPrimary="false">3</ReferenceNumber>
+							<ReferenceNumber type="QTY" isPrimary="false">5</ReferenceNumber>
+						</ReferenceNumbers>
+						<LineItem lineNumber="1">
+							<Cube>130032.1566</Cube>
+						</LineItem>
+						<Description>Original 480mL Slim Bottle Dual Pour 18 each per case</Description>
+						<HazardousMaterial>false</HazardousMaterial>
+						<Weights>
+							<Weight type="ordered" uom="LB">110</Weight>
+							<Weight type="actual" uom="LB">110</Weight>
+						</Weights>
+						<Quantities>
+							<Quantity type="ordered" uom="Case">5</Quantity>
+							<Quantity type="actual" uom="Case">5</Quantity>
+						</Quantities>
+						<FreightClasses>
+							<FreightClass type="">70</FreightClass>
+						</FreightClasses>
+						<NmfcCode>59420-03</NmfcCode>
+					</ItemGroup>
+					<ItemGroup id="SM.AR480.18" GTIN="00697366002320" isShipUnit="false" isHandlingUnit="false" sequence="2">
+						<ReferenceNumbers>
+							<ReferenceNumber type="IN" isPrimary="false">494218</ReferenceNumber>
+							<ReferenceNumber type="VN" isPrimary="false">SM.AR480.18</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">494218</ReferenceNumber>
+							<ReferenceNumber type="Pack" isPrimary="false">18</ReferenceNumber>
+							<ReferenceNumber type="MG" isPrimary="false">1936</ReferenceNumber>
+							<ReferenceNumber type="LT" isPrimary="false">A01042226</ReferenceNumber>
+							<ReferenceNumber type="GTIN" isPrimary="false">00697366002320</ReferenceNumber>
+							<ReferenceNumber type="UOM" isPrimary="false">CA</ReferenceNumber>
+							<ReferenceNumber type="QT" isPrimary="false">4.0</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">SM.AR480.18</ReferenceNumber>
+							<ReferenceNumber type="Inner Pack" isPrimary="false">3</ReferenceNumber>
+							<ReferenceNumber type="QTY" isPrimary="false">4</ReferenceNumber>
+						</ReferenceNumbers>
+						<LineItem lineNumber="2">
+							<Cube>130032.1566</Cube>
+						</LineItem>
+						<Description>Clinical 480mL Slim Bottle Dual Pour 18 each per case</Description>
+						<HazardousMaterial>false</HazardousMaterial>
+						<Weights>
+							<Weight type="ordered" uom="LB">88</Weight>
+							<Weight type="actual" uom="LB">88</Weight>
+						</Weights>
+						<Quantities>
+							<Quantity type="ordered" uom="Case">4</Quantity>
+							<Quantity type="actual" uom="Case">4</Quantity>
+						</Quantities>
+						<FreightClasses>
+							<FreightClass type="">70</FreightClass>
+						</FreightClasses>
+						<NmfcCode>59420-03</NmfcCode>
+					</ItemGroup>
+					<ItemGroup id="SM255" GTIN="00697366002573" isShipUnit="false" isHandlingUnit="false" sequence="3">
+						<ReferenceNumbers>
+							<ReferenceNumber type="IN" isPrimary="false">623621</ReferenceNumber>
+							<ReferenceNumber type="VN" isPrimary="false">SM255</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">623621</ReferenceNumber>
+							<ReferenceNumber type="Pack" isPrimary="false">4</ReferenceNumber>
+							<ReferenceNumber type="MG" isPrimary="false">956</ReferenceNumber>
+							<ReferenceNumber type="LT" isPrimary="false">A11050725</ReferenceNumber>
+							<ReferenceNumber type="GTIN" isPrimary="false">00697366002573</ReferenceNumber>
+							<ReferenceNumber type="UOM" isPrimary="false">CA</ReferenceNumber>
+							<ReferenceNumber type="QT" isPrimary="false">21.0</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">SM255</ReferenceNumber>
+							<ReferenceNumber type="Inner Pack" isPrimary="false">2</ReferenceNumber>
+							<ReferenceNumber type="QTY" isPrimary="false">21</ReferenceNumber>
+						</ReferenceNumbers>
+						<LineItem lineNumber="3">
+							<Cube>549.45</Cube>
+						</LineItem>
+						<Description>32oz Dual Pour Clinical DDS Activated Oral Rinse</Description>
+						<HazardousMaterial>false</HazardousMaterial>
+						<Weights>
+							<Weight type="ordered" uom="LB">294</Weight>
+							<Weight type="actual" uom="LB">294</Weight>
+						</Weights>
+						<Quantities>
+							<Quantity type="ordered" uom="Case">21</Quantity>
+							<Quantity type="actual" uom="Case">21</Quantity>
+						</Quantities>
+						<FreightClasses>
+							<FreightClass type="">70</FreightClass>
+						</FreightClasses>
+						<NmfcCode>59420-03</NmfcCode>
+					</ItemGroup>
+					<ItemGroup id="SM.DR480.18" GTIN="00697366003570" isShipUnit="false" isHandlingUnit="false" sequence="4">
+						<ReferenceNumbers>
+							<ReferenceNumber type="IN" isPrimary="false">756344</ReferenceNumber>
+							<ReferenceNumber type="VN" isPrimary="false">SM.DR480.18</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">756344</ReferenceNumber>
+							<ReferenceNumber type="Pack" isPrimary="false">18</ReferenceNumber>
+							<ReferenceNumber type="MG" isPrimary="false">1937</ReferenceNumber>
+							<ReferenceNumber type="LT" isPrimary="false">D11122325</ReferenceNumber>
+							<ReferenceNumber type="GTIN" isPrimary="false">00697366003570</ReferenceNumber>
+							<ReferenceNumber type="UOM" isPrimary="false">CA</ReferenceNumber>
+							<ReferenceNumber type="QT" isPrimary="false">2.0</ReferenceNumber>
+							<ReferenceNumber type="Consignee Item Number" isPrimary="false">SM.DR480.18</ReferenceNumber>
+							<ReferenceNumber type="Inner Pack" isPrimary="false">3</ReferenceNumber>
+							<ReferenceNumber type="QTY" isPrimary="false">2</ReferenceNumber>
+						</ReferenceNumbers>
+						<LineItem lineNumber="4">
+							<Cube>130032.1566</Cube>
+						</LineItem>
+						<Description>DryMouth 480mL Slim Bottle Dual Pour 18 each per case</Description>
+						<HazardousMaterial>false</HazardousMaterial>
+						<Weights>
+							<Weight type="ordered" uom="LB">44</Weight>
+							<Weight type="actual" uom="LB">44</Weight>
+						</Weights>
+						<Quantities>
+							<Quantity type="ordered" uom="Case">2</Quantity>
+							<Quantity type="actual" uom="Case">2</Quantity>
+						</Quantities>
+						<FreightClasses>
+							<FreightClass type="">70</FreightClass>
+						</FreightClasses>
+						<NmfcCode>59420-03</NmfcCode>
+					</ItemGroup>
+				</ItemGroups>
+				<Payment>
+					<Method>Prepaid</Method>
+					<BillTo>
+						<Address>
+							<LocationCode>37024L</LocationCode>
+						</Address>
+					</BillTo>
+				</Payment>
+			</Shipment>
+		</Shipments>
+	</Load>
+</MercuryGate>
