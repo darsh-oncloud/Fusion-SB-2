@@ -440,6 +440,7 @@ define(['N/file', 'N/log', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/t
                         orderQty: 0,
                         weightQty: 0,
                         cubeQty: 0,
+                        poTotals: {},
                         rawRows: []
                     };
                 }
@@ -447,6 +448,14 @@ define(['N/file', 'N/log', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/t
                 const g = groups[groupKey];
                 if (vendorNbr && g.vendorNbrs.indexOf(vendorNbr) === -1) g.vendorNbrs.push(vendorNbr);
                 if (po && g.poNumbers.indexOf(po) === -1) g.poNumbers.push(po);
+if (po) {
+    if (!g.poTotals[po]) g.poTotals[po] = { po: po, orderQty: 0, weightQty: 0, cubeQty: 0 };
+    g.poTotals[po].orderQty += orderQty;
+    g.poTotals[po].weightQty += weightQty;
+    g.poTotals[po].cubeQty += cubeQty;
+}
+
+          
                 if (truck && g.truckNumbers.indexOf(truck) === -1) g.truckNumbers.push(truck);
                 g.orderQty += orderQty;
                 g.weightQty += weightQty;
@@ -482,6 +491,7 @@ define(['N/file', 'N/log', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/t
                         orderQty: 0,
                         weightQty: 0,
                         cubeQty: 0,
+                        poTotals: {},
                         rawRows: []
                     };
                 }
@@ -489,6 +499,14 @@ define(['N/file', 'N/log', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/t
                 const c = consolidated[rollupKey];
                 g.poNumbers.forEach((po) => { if (c.poNumbers.indexOf(po) === -1) c.poNumbers.push(po); });
                 g.truckNumbers.forEach((t) => { if (c.truckNumbers.indexOf(t) === -1) c.truckNumbers.push(t); });
+
+Object.keys(g.poTotals).forEach((po) => {
+    if (!c.poTotals[po]) c.poTotals[po] = { po: po, orderQty: 0, weightQty: 0, cubeQty: 0 };
+    c.poTotals[po].orderQty += g.poTotals[po].orderQty;
+    c.poTotals[po].weightQty += g.poTotals[po].weightQty;
+    c.poTotals[po].cubeQty += g.poTotals[po].cubeQty;
+});
+              
                 c.orderQty += g.orderQty;
                 c.weightQty += g.weightQty;
                 c.cubeQty += g.cubeQty;
@@ -842,6 +860,7 @@ define(['N/file', 'N/log', 'N/record', 'N/search', 'N/format', 'N/runtime', 'N/t
             rec.setValue({ fieldId: 'custrecord_ft_order_quantity', value: group.orderQty });
             rec.setValue({ fieldId: 'custrecord_ft_weight_quantity', value: group.weightQty });
             rec.setValue({ fieldId: 'custrecord_ft_cube_quantity', value: group.cubeQty });
+            rec.setValue({ fieldId: 'custrecord_ft_po_quantity_payload', value: JSON.stringify(Object.keys(group.poTotals).map((po) => group.poTotals[po])) });
 
             if (group.mabd) {
                 try {
