@@ -124,7 +124,8 @@ address.locationId = lookup.location_id || "";
                     g.custrecord_ft_grs_origappt_dateunavail,
                     g.custrecord_no_appointments_available,
                     g.custrecord_sail_record,
-                    g.custrecord_po_numbers
+                    g.custrecord_po_numbers,
+                    g.custrecord_ft_po_quantity_payload
                 FROM 
                     customrecord_ft_walmart_grs g
                 LEFT JOIN 
@@ -228,15 +229,30 @@ const stopLocName = locAddress.addressee || finalLocName || '';
                     const pieces = isNaN(qtyVal) || qtyVal <= 0 ? 1 : qtyVal;
                     const wtVal = parseFloat(rec.custrecord_ft_weight_quantity);
                     const weight = isNaN(wtVal) ? 0 : wtVal;
+                    const poPayload = JSON.parse(rec.custrecord_ft_po_quantity_payload || '[]');
 
-                    const referenceNumbers = poValues.map((po, idx) => ({
-                        "type": "PO",
-                        "description": "Purchase Order",
-                        "value": po,
-                        "pallets": idx === 0 ? pallets : 0,
-                        "pieces": idx === 0 ? pieces : 0,
-                        "weightInLbs": idx === 0 ? weight : 0
-                    }));
+
+                  const referenceNumbers = poValues.map((po, idx) => {
+                      const poQty = poPayload.find(p => String(p.po) === String(po));
+
+                      return {
+                          "type": "PO",
+                          "description": "Purchase Order",
+                          "value": po,
+                          "pallets": poQty ? poQty.cubeQty : (idx === 0 ? pallets : 0),
+                          "pieces": poQty ? poQty.orderQty : (idx === 0 ? pieces : 0),
+                          "weightInLbs": poQty ? poQty.weightQty : (idx === 0 ? weight : 0)
+                      };
+                 });
+                  
+                    // const referenceNumbers = poValues.map((po, idx) => ({
+                    //     "type": "PO",
+                    //     "description": "Purchase Order",
+                    //     "value": po,
+                    //     "pallets": idx === 0 ? pallets : 0,
+                    //     "pieces": idx === 0 ? pieces : 0,
+                    //     "weightInLbs": idx === 0 ? weight : 0
+                    // }));
 
                     return {
                         "proNumber": String(proNum),
